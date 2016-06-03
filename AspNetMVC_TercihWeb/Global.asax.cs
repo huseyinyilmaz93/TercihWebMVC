@@ -18,9 +18,6 @@ namespace AspNetMVC_TercihWeb
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            DataTransfer d = new DataTransfer();
-            d.Method1();
         }
     }
 }
