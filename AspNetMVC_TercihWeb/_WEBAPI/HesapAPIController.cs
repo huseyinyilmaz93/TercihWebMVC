@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Microsoft.Owin.Host.SystemWeb;
+using AspNetMVC_TercihWeb.Models;
+using System.Threading.Tasks;
 
 namespace AspNetMVC_TercihWeb._WEBAPI
 {
@@ -24,18 +26,16 @@ namespace AspNetMVC_TercihWeb._WEBAPI
         {
             userStore = new UserStore<AppKullanici>(db);
             userManager = new UserManager<AppKullanici>(userStore);
-            //var provider = new DpapiDataProtectionProvider();
-
         }
 
         [Route("Kayit")]
         [HttpPost]
-        public HttpResponseMessage Kayit(Kayit kullanici)
+        public HttpResponseMessage Kayit([FromBody]Kayit kullanici)
         {
             if (kullanici == null)
             {
-                ModelState.AddModelError("BosForm","Form bilgileri boş geçilemez");
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                ModelState.AddModelError("Hata","Form bilgileri boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
             if (!ModelState.IsValid)
             {
@@ -44,13 +44,13 @@ namespace AspNetMVC_TercihWeb._WEBAPI
 
             if (userManager.FindByName(kullanici.KullaniciAdi) != null)
             {
-                ModelState.AddModelError("KullaniciAdi", "Bu kullanıcı adı başka bir kullanıcı tarafından kullanılmaktadır!");
-                return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ModelState);
+                ModelState.AddModelError("Hata", "Bu kullanıcı adı başka bir kullanıcı tarafından kullanılmaktadır!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
             else if (userManager.FindByEmail(kullanici.Email) != null)
             {
-                ModelState.AddModelError("Email", "Girilen Email başka bir kullanıcı tarafından kullanılmaktadır!");
-                return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ModelState);
+                ModelState.AddModelError("Hata", "Girilen Email başka bir kullanıcı tarafından kullanılmaktadır!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
 
             AppKullanici yeniKullanici = new AppKullanici();
@@ -59,6 +59,8 @@ namespace AspNetMVC_TercihWeb._WEBAPI
             yeniKullanici.UserName = kullanici.KullaniciAdi;
             yeniKullanici.Email = kullanici.Email;
             yeniKullanici.EmailConfirmed = false;
+            yeniKullanici.SifremiUnuttum = DateTime.Now;
+            yeniKullanici.SifremiUnuttum = yeniKullanici.SifremiUnuttum.AddHours(-3);
 
             try
             {
@@ -66,30 +68,29 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                 if (idtResult.Succeeded)
                 {
                     userManager.AddToRole(yeniKullanici.Id, "KULLANICI");
-                    return Request.CreateResponse(HttpStatusCode.OK);
+                    return Request.CreateResponse(HttpStatusCode.OK,yeniKullanici.Id);
                 }
                 else
                 {
-                    ModelState.AddModelError("Kayıt", "Kullanıcıya rol atanamadı!");
-                    return Request.CreateErrorResponse(HttpStatusCode.Ambiguous, ModelState);
+                    ModelState.AddModelError("Hata", "Kullanıcıya rol atanamadı!");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
                 }
-
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                ModelState.AddModelError("Kayıt", "Kullanıcıyı kaydederken bir hata meydana geldi.");
+                ModelState.AddModelError("Hata", e.Message + " Kullanıcıyı kaydederken bir hata meydana geldi.");
                 return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
         }
 
         [Route("GirisYap")]
         [HttpPost]
-        public HttpResponseMessage GirisYap(Giris kullanici)
+        public HttpResponseMessage GirisYap([FromBody]Giris kullanici)
         {
             if (kullanici == null)
             {
-                ModelState.AddModelError("BosForm", "Form bilgileri boş geçilemez");
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                ModelState.AddModelError("Hata", "Form bilgileri boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
 
             if (!ModelState.IsValid)
@@ -103,8 +104,8 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                 
                 if (girisYapacak == null)
                 {
-                    ModelState.AddModelError("GirisHatasi", "Kullanıcı adı veya şifre yanlış");
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest,ModelState);
+                    ModelState.AddModelError("Hata", "Kullanıcı adı veya şifre yanlış");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
                 }
                 else
                 {
@@ -114,11 +115,188 @@ namespace AspNetMVC_TercihWeb._WEBAPI
             }
             catch (Exception)
             {
-                ModelState.AddModelError("ServerHatasi", "Giriş yaparken bir hata oluştu!");
-                return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable,ModelState);
+                ModelState.AddModelError("Hata", "Giriş yaparken bir hata oluştu!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
 
 
         }
+
+        [Route("SifreDegistir/{id}")]
+        [HttpPost]
+        public HttpResponseMessage SifreDegistir([FromBody]SifreDegistir sifreDegisim,[FromUri] string id)
+        {
+            if (sifreDegisim == null)
+            {
+                ModelState.AddModelError("Hata", "Form bilgileri boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            try
+            {
+                AppKullanici sifreDegisecek = userManager.FindById(id);
+                AppKullanici sifreKontrol = userManager.Find(sifreDegisim.KullaniciAdi, sifreDegisim.YeniSifre);
+                if (sifreKontrol == null)
+                {
+                    ModelState.AddModelError("Hata", "Lütfen Eski Sifre alanını kontrol edin. Yanlış giriş yapıldı");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+                if (sifreDegisecek.UserName != sifreDegisim.KullaniciAdi)
+                {
+                    ModelState.AddModelError("Hata", "Kullanıcı adı değeriniz eşleşmiyor. Lütfen şifresini değiştirmek istediğiniz kullanıcı ile giriş yapın");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+
+                userManager.ChangePassword(sifreDegisecek.Id, sifreDegisim.EskiSifre, sifreDegisim.YeniSifre);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Hata", "Şifre değiştirirken bir hata oluştu!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+        }
+
+        [HttpPost]
+        [Route("SifremiUnuttum")]
+        public HttpResponseMessage SifremiUnuttum([FromBody]SifremiUnuttum sifremiUnuttum)
+        {
+            if (sifremiUnuttum == null)
+            {
+                ModelState.AddModelError("Hata", "Form bilgileri boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            try
+            {
+                AppKullanici kullanici = userManager.FindByEmail(sifremiUnuttum.Email);
+                if (kullanici == null)
+                {
+                    ModelState.AddModelError("Hata", "Verilen Email adresi sistemde kayıtlı değil");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+                else if (sifremiUnuttum.KullaniciAdi != kullanici.UserName)
+                {
+                    ModelState.AddModelError("Hata", "Email adresi ile Kullanıcı Adı eşleşmiyor");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+
+                MailGonder.SifremiUnuttum(kullanici);
+                kullanici.SifremiUnuttum = DateTime.Now;
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK,"Email adresinize sıfırlama isteğiniz için Email gönderildi");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Hata", "Form işlenirken bir hata oluştu!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("SifremiUnuttumSure/{id}")]
+        public HttpResponseMessage SifremiUnuttumSure(string id)
+        {
+            AppKullanici kullanici = userManager.FindById(id);
+            if (DateTime.Compare(kullanici.SifremiUnuttum.AddHours(3), DateTime.Now) >= 0)
+                return Request.CreateResponse(HttpStatusCode.OK);
+            else return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "İstek zaman aşımına uğradı!");
+        }
+
+        [Route("SifremiUnuttumOnay/{id}")]
+        [HttpPost]
+        public HttpResponseMessage SifremiUnuttumOnay([FromBody]SifremiUnuttumOnay sifremiUnuttumOnay, [FromUri] string id)
+        {
+            if (sifremiUnuttumOnay == null)
+            {
+                ModelState.AddModelError("Hata", "Form bilgileri boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            try
+            {
+                AppKullanici sifreDegisecek = userManager.FindById(id);
+                if (sifreDegisecek == null)
+                {
+                    ModelState.AddModelError("Hata", "Geçersiz id değeri");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+                AppKullanici kullanici = userManager.FindById(id);
+                String hashSifre = userManager.PasswordHasher.HashPassword(sifremiUnuttumOnay.YeniSifre);
+                Task t = (userStore.SetPasswordHashAsync(kullanici, hashSifre));
+                t.Wait();
+                t = (userStore.UpdateAsync(kullanici));
+                t.Wait();
+                kullanici.SifremiUnuttum = kullanici.SifremiUnuttum.AddHours(-3);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK,"OK");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Hata", "Şifre değiştirirken bir hata oluştu!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+        }
+
+        [HttpGet]
+        [Route("KayitOnaylama/{id}")]
+        public HttpResponseMessage KayitOnaylama(string id)
+        {
+            try
+            {
+                AppKullanici kullanici = userManager.FindById(id);
+                if (kullanici.EmailConfirmed == true)
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                MailGonder.EMailOnaylama(kullanici);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Hata", "Mail gönderilirken bir hata oluşturuldu. Tekrar deneyin!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("KayitBasarili/{id}")]
+        public HttpResponseMessage KayitBasarili(string id)
+        {
+            try
+            {
+                AppKullanici kullanici = userManager.FindById(id);
+                if (kullanici == null)
+                {
+                    ModelState.AddModelError("Hata", "Verilen id değerine uygun kullanıcı bulunamadı!");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+                kullanici.EmailConfirmed = true;
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Hata", "İşlem onaylanırken bir hata oluştu!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+        }
+
     }
 }

@@ -1,0 +1,41 @@
+﻿@model AspNetMVC_TercihWeb.Models.AccountModels.SifremiUnuttumOnay
+
+@{
+    ViewBag.Title = "SifremiUnuttumOnay";
+}
+<script src="~/Scripts/Hesap/sifremiUnuttumOnay.js"></script>
+<h2>SifremiUnuttumOnay</h2>
+<div id="form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>SifremiUnuttumOnay</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.YeniSifre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.YeniSifre)
+                    @Html.ValidationMessageFor(model => model.YeniSifre)
+                </div>
+            </div>
+            <input id="id" type="hidden" value="@ViewBag.id" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.YeniSifreTekrar, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.YeniSifreTekrar)
+                    @Html.ValidationMessageFor(model => model.YeniSifreTekrar)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btn_sifremiUnuttumOnay" type="button" value="Onayla" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

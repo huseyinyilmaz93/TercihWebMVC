@@ -4,30 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace AspNetMVC_TercihWeb.Controllers
 {
     public class KullaniciController : _BASE_AccountController
     {
-        [Authorize(Roles = "Kullanici")]
+        [Authorize(Roles = "KULLANICI")]
         public ActionResult Index()
         {
+            ViewBag.id = User.Identity.GetUserId();
+            ViewBag.name = User.Identity.GetUserName();
             return View();
         }
 
         [HttpPost]
-        public ActionResult GirisYap(Giris kullanici)
+        public void Giris(Giris kullanici)
         {
             base.GirisYap(kullanici);
-            return View("Index");
         }
 
         [HttpGet]
-        [Authorize(Roles = "Kullanici")]
-        public ActionResult Cikis()
+        [Authorize(Roles = "KULLANICI")]
+        public void Cikis()
         {
             base.CikisYap();
-            return View("Index", "Site");
         }
 	}
 }

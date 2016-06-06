@@ -1,0 +1,44 @@
+﻿@model AspNetMVC_TercihWeb.Models.AccountModels.SifremiUnuttum
+
+@{
+    ViewBag.Title = "SifremiUnuttum";
+}
+<script src="~/Scripts/Hesap/sifremiUnuttum.js"></script>
+<h2>SifremiUnuttum</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div style="color:red" id="hata" class="col-md-10">
+        </div>
+    </div>
+    <input id="id" type="hidden" value="@ViewBag.id" />
+    <div class="form-horizontal">
+        <h4>SifremiUnuttum</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KullaniciAdi)
+                @Html.ValidationMessageFor(model => model.KullaniciAdi)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btn_sifremiUnuttum" type="button" value="Gönder" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

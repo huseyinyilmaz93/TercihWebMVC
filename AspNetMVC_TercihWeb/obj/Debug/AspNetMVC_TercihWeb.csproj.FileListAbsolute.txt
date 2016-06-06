@@ -92,3 +92,4 @@ C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.pdb
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.csprojResolveAssemblyReference.cache

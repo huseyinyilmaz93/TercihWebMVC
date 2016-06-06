@@ -9,25 +9,23 @@ namespace AspNetMVC_TercihWeb.Controllers
 {
     public class AdminController : _BASE_AccountController
     {
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="ADMIN")]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult GirisYap(Giris kullanici)
+        public void Giris(Giris kullanici)
         {
             base.GirisYap(kullanici);
-            return View("Index");
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin")]
-        public ActionResult Cikis()
+        [Authorize(Roles="ADMIN")]
+        public void Cikis()
         {
             base.CikisYap();
-            return View("Index", "Site");
         }
 	}
 }

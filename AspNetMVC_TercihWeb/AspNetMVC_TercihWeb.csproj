@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -135,6 +136,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Hesap\giris.js" />
+    <Content Include="Scripts\Hesap\kayit.js" />
+    <Content Include="Scripts\Hesap\kayitBasarili.js" />
+    <Content Include="Scripts\Hesap\kayitOnaylama.js" />
+    <Content Include="Scripts\Hesap\sifreDegistir.js" />
+    <Content Include="Scripts\Hesap\sifremiUnuttum.js" />
+    <Content Include="Scripts\Hesap\sifremiUnuttumOnay.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -144,6 +152,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HesapController.cs" />
     <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\_BASE_AccountController.cs" />
@@ -156,6 +165,10 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels\Giris.cs" />
     <Compile Include="Models\AccountModels\Kayit.cs" />
+    <Compile Include="Models\AccountModels\SifreDegistir.cs" />
+    <Compile Include="Models\AccountModels\SifremiUnuttum.cs" />
+    <Compile Include="Models\AccountModels\SifremiUnuttumOnay.cs" />
+    <Compile Include="Models\MailGonder.cs" />
     <Compile Include="Models\MembershipModels\AppKullanici.cs" />
     <Compile Include="Models\MembershipModels\AppRol.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +192,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Site\Index.cshtml" />
+    <Content Include="Views\Hesap\Giris.cshtml" />
+    <Content Include="Views\Hesap\Kayit.cshtml" />
+    <Content Include="Views\Kullanici\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Hesap\SifreDegistir.cshtml" />
+    <Content Include="Views\Hesap\SifremiUnuttum.cshtml" />
+    <Content Include="Views\Hesap\SifremiUnuttumOnay.cshtml" />
+    <Content Include="Views\Hesap\KayitBasarili.cshtml" />
+    <Content Include="Views\Hesap\KayitOnaylama.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -188,10 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Kullanici\" />
-    <Folder Include="Views\_BASE_Account\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606021712062_Initial.resx">

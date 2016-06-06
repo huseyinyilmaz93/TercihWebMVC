@@ -19,7 +19,7 @@ namespace AspNetMVC_TercihWeb.Models.AccountModels
         public string Sifre { get; set; }
         [Required]
         [Display(Name="Şifre Tekrar")]
-        [Compare("Sifre",ErrorMessage="Şifreler Uyuşmuyor")]
+        [Compare("Sifre",ErrorMessage="Şifreler eşleşmiyor")]
         public string SifreTekrar { get; set; }
     }
 }

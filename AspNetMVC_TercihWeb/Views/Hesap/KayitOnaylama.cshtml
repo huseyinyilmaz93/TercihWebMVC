@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "KayitOnaylama";
+}
+
+<h2>Kayıt Onaylama</h2>
+<script src="~/Scripts/Hesap/kayitOnaylama.js"></script>
+<p>
+    Tebrikler, kayıt formunu doldurdunuz. Tercih listenizi oluşturabilmek için son bir adım kaldı. Lütfen mail adresinize
+    gelen linke tıklayarak işlemi tamamlayınız.
+    <input type="hidden" id="id" value="@ViewBag.id" />
+</p>
+<p>Email gelmedi mi? Tekrar göndermek için <input type="button" value="tıklayın" id="mailGonder">. </p>

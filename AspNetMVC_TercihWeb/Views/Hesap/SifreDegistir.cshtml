@@ -1,0 +1,63 @@
+﻿@model AspNetMVC_TercihWeb.Models.AccountModels.SifreDegistir
+
+@{
+    ViewBag.Title = "SifreDegistir";
+}
+<script src="~/Scripts/Hesap/sifreDegistir.js"></script>
+<h2>SifreDegistir</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-group">
+        <div style="color:red" id="hata" class="col-md-10">
+        </div>
+    </div>
+
+    
+    <div class="form-horizontal">
+        <h4>SifreDegistir</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        
+        <input type="hidden" id="id" value="@ViewBag.id" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KullaniciAdi)
+                @Html.ValidationMessageFor(model => model.KullaniciAdi)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EskiSifre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.EskiSifre)
+                @Html.ValidationMessageFor(model => model.EskiSifre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YeniSifre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.YeniSifre)
+                @Html.ValidationMessageFor(model => model.YeniSifre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YeniSifreTekrar, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.YeniSifreTekrar)
+                @Html.ValidationMessageFor(model => model.YeniSifreTekrar)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btn_sifreDegistir" type="button" value="Şifre Değiştir" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

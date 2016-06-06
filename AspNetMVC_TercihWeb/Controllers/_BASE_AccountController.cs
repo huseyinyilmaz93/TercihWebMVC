@@ -23,7 +23,7 @@ namespace AspNetMVC_TercihWeb.Controllers
             AppKullanici girisYapacak = userManager.Find(kullanici.KullaniciAdi, kullanici.Sifre);
 
             IAuthenticationManager authManager = HttpContext.GetOwinContext().Authentication;
-            ClaimsIdentity identity = userManager.CreateIdentity(girisYapacak, "ApplicationCookie");
+            ClaimsIdentity identity = userManager.CreateIdentity(girisYapacak, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationProperties authProps = new AuthenticationProperties();
             authProps.IsPersistent = kullanici.BeniHatirla;
             authManager.SignIn(authProps, identity);
@@ -33,5 +33,6 @@ namespace AspNetMVC_TercihWeb.Controllers
             IAuthenticationManager authManager = HttpContext.GetOwinContext().Authentication;
             authManager.SignOut();
         }
+        protected void SifreDegistir() { }
 	}
 }
