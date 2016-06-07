@@ -5,7 +5,6 @@
     }
 
     function fnc_girisYap() {
-
         var hata = document.getElementById("hata");
         hata.innerText = "";
 
@@ -13,7 +12,7 @@
         var Sifre = document.getElementById("Sifre").value;
         var BeniHatirla = document.getElementById("BeniHatirla").value;
 
-
+        //alert(KullaniciAdi + Sifre);
         var model = {
             KullaniciAdi: KullaniciAdi, Sifre: Sifre, BeniHatirla: BeniHatirla
         };
@@ -24,7 +23,6 @@
             url: "/API/Hesap/GirisYap",
             contentType: "application/json",
             success: function (data) {
-                alert("123");
                 var url = "";
                 var kullaniciTipi = data;
                 if (data == "ADMIN")

@@ -13,7 +13,7 @@ namespace AspNetMVC_TercihWeb.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201606021712062_Initial"; }
+            get { return "201606062158280_Initial"; }
         }
         
         string IMigrationMetadata.Source

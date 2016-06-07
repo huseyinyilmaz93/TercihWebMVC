@@ -148,7 +148,7 @@ namespace AspNetMVC_TercihWeb
             }
 
 
-            { //FAKÜLTE
+            { //BÖLÜM
                 SqlCommand cmd = new SqlCommand("select * from Bolum", con);
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
@@ -188,30 +188,31 @@ namespace AspNetMVC_TercihWeb
                 rdr.Close();
                 db.SaveChanges();
             }
-            { //UNIFAK
-                SqlCommand cmd = new SqlCommand("select * from UniFak", con);
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
+            //{ //UNIFAK
+            //    SqlCommand cmd = new SqlCommand("select * from UniFak", con);
+            //    SqlDataReader rdr;
+            //    rdr = cmd.ExecuteReader();
 
-                while (rdr.Read())
-                {
-                    int uniNo = rdr.GetInt32(0);
-                    int fakNo = rdr.GetInt32(1);
-                    Fakulte f = (from fak in db.Fakulteler
-                                 where fak.FakulteNo == fakNo
-                                 select fak).FirstOrDefault();
+            //    while (rdr.Read())
+            //    {
+            //        int uniNo = rdr.GetInt32(0);
+            //        int fakNo = rdr.GetInt32(1);
+            //        Fakulte f = (from fak in db.Fakulteler.Include("Universiteler")
+            //                     where fak.FakulteNo == fakNo
+            //                     select fak).FirstOrDefault();
 
-                    Universite u = (from uni in db.Universiteler
-                                    where uni.UniversiteNo == uniNo
-                                    select uni).FirstOrDefault();
+            //        Universite u = (from uni in db.Universiteler.Include("Fakulteler")
+            //                        where uni.UniversiteNo == uniNo
+            //                        select uni).FirstOrDefault();
+                    
+            //        if (u.Fakulteler == null) u.Fakulteler = new List<Fakulte>();
+            //        if (f != null && u != null)
+            //            f.Universiteler.Add(u);
 
-                    if (f != null && u != null)
-                        u.Fakulteler.Add(f);
-
-                }
-                rdr.Close();
-                db.SaveChanges();
-            }
+            //    }
+            //    rdr.Close();
+            //    db.SaveChanges();
+            //}
             { //UNIFAKBOL
                 SqlCommand cmd = new SqlCommand("select * from UniFakBol", con);
                 SqlDataReader rdr;
@@ -219,18 +220,21 @@ namespace AspNetMVC_TercihWeb
 
                 while (rdr.Read())
                 {
+                    int uniNo = rdr.GetInt32(0);
                     string bolKodu = rdr.GetString(2);
                     int fakNo = rdr.GetInt32(1);
-                    Fakulte f = (from fak in db.Fakulteler
-                                 where fak.FakulteNo == fakNo
+                    Fakulte f = (from fak in db.Fakulteler.Include("Universiteler")
+                                 from univ in fak.Universiteler
+                                 where fak.FakulteNo == fakNo && uniNo == univ.UniversiteNo
                                  select fak).FirstOrDefault();
 
                     Bolum b = (from bol in db.Bolumler
                                where bol.BolumKodu == bolKodu
                                select bol).FirstOrDefault();
-
-                    if (f != null && b != null)
-                        f.Bolumler.Add(b);
+                    if(b.Fakulte == null)
+                    {
+                        b.Fakulte = f;
+                    }
 
                 }
                 rdr.Close();
@@ -240,7 +244,7 @@ namespace AspNetMVC_TercihWeb
         public void Method1()
         {
             DBContext db = new DBContext();
-            string connectionString = "Server=***;Database=***;User Id=***;Password=***;";
+            string connectionString = "Server=cp.tercihweb.com;Database=DB_Huseyin;User Id=DB_User_Huseyin;Password=hus123eyin/*-;";
             SqlConnection con = new SqlConnection();
             con.ConnectionString = connectionString;
 
@@ -262,8 +266,8 @@ namespace AspNetMVC_TercihWeb
             db.SaveChanges();
             con.Open();
             
-            //Method2(con,db);
-            //Method3(con,db);
+            Method2(con,db);
+            Method3(con,db);
 
             { //LİSE 
                 SqlCommand cmd = new SqlCommand("select okulNo,okulAdi,tabanPuani,ilNo,ilceNo,turNo,dilNo from Okul INNER JOIN Iletisim ON Okul.iletNo=Iletisim.iletNo   ", con);

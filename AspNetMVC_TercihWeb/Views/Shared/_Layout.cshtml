@@ -1,12 +1,87 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - TercihWeb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Content/css/Ozel.css" rel="stylesheet" />
+    <link href="~/Content/css/reset.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/footer.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
 <body>
-    @RenderBody()
+    <div class="container m0">
+        <header class="col-md-12 col-lg-12 col-xs-12 col-sm-12 ml-15">
+            <img class="img-responsive" alt="Fon" src="~/Content/images/fon.jpg" />
+            <nav class="navbar navbar-default">
+                <div class="container-form">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Navigasyon</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/Site/Index"><strong>Tercih Web</strong></a>
+                    </div>
+                    <input id="id" type="hidden" value="@User.Identity.GetUserId()" /> 
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/Site/Index">Anasayfa <span class="sr-only">Varsayılan</span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hesapla <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="HesapUni.html">Üniversite Puanı</a></li>
+                                    <li><a href="HesapLise.html">Lise Puanı</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/Kullanici/Index">Benim Sayfam</a></li>
+                                <li><a href="/Kullanici/Cikis">Çıkış Yap</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Hesap/Giris">Giriş Yap</a></li>
+                            }
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    </div><!-- /.container-fluid -->
+                </div>
+            </nav>
+        </header>
+        @RenderBody()
+    </div>
+    <div class="clearfix"></div> <!--END OF CONTENT || FOOTER BEGINS -->
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <h3>Tercih<span>WEB</span></h3>
+            <p class="footer-links">
+                <a href="~/Site/Index">Anasayfa</a>
+                ·
+                <a href="~/UniPuan/Index">Üniversite Puan Hesaplama</a>
+                ·
+                <a href="~/LisePuan/Index">Lise Puan Hesaplama</a>
+                ·
+                <a href="~/UniPuan/Puanlar">Üniversite Puanları</a>
+                ·
+                <a href="~/LisePuan/Puanlar">Lise Puanları</a>
+            </p>
+            <p class="footer-company-name">TercihWEB &copy; 2016</p>
+            <div class="footer-icons">
+
+            </div>
+        </div>
+    </footer>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery-2.2.4.min.js"></script>
 </body>
 </html>

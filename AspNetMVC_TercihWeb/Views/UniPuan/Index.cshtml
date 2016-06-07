@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Üniversite Puanları";
+}
+<script src="~/Scripts/UniPuan/index.js"></script>
+<div id="divUni">
+    <label>Üniversite : </label>
+    <select id="universiteler">
+    </select>
+</div>
+<div id="divFak">
+</div>
+
+<div id="divBol">
+</div>
+<div>
+    <label> Arama : </label> <input type="text" id="aramaKelime" /> 
+</div>
+<div>
+    <label>En Düşük Puan : </label> <input type="text" id="enDusuk" /> 
+</div>
+<div>
+    <label>En Yüksek Puan : </label> <input type="text" id="enYuksek" /> 
+</div>
+<div>
+    <label>Kayıt Sayısı : </label> 
+    <select id="kayitSayisi">
+        <option value="10">10</option>
+        <option selected value="15">15</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+</div>
+
+<div id="sonuclar">
+    <table>
+        <thead>
+            <tr>
+                <th>Bölüm Kodu</th>
+                <th>Üniversite Adı</th>
+                <th>Fakülte Adı</th>
+                <th>Bölüm Adı</th>
+                <th>Puan Türü</th>
+                <th>Yerleşen</th>
+                <th>Kontenjan</th>
+                <th>En Yüksek Puan (Okul Birincisi)</th>
+                <th>En Düşük Puan (Okul Birincisi)</th>
+                <th>En Yüksek Puan</th>
+                <th>En Düşük Puan</th>
+            </tr>
+        </thead>
+        <tbody id="kayitlar">
+        </tbody>
+    </table>
+</div>

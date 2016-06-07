@@ -1,10 +1,7 @@
-﻿"use strict";
-
-(function () {
+﻿
     window.onload = function () {
         document.getElementById("btn_sifremiUnuttum").onclick = fnc_sifremiUnuttum;
     }
-
     function fnc_sifremiUnuttum() {
         var hata = document.getElementById("hata");
         hata.innerText = "";
@@ -51,4 +48,3 @@
         })
     }
 
-})();

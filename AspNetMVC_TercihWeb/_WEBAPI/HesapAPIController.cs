@@ -92,12 +92,18 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                 ModelState.AddModelError("Hata", "Form bilgileri boş geçilemez");
                 return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
-
-            if (!ModelState.IsValid)
+            if (kullanici.KullaniciAdi == "")
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+                ModelState.AddModelError("Hata", "Kullanıcı Adı boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
 
+            } 
+            else if(kullanici.Sifre == "")
+            {
+                ModelState.AddModelError("Hata", "Şifre boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+
+            }
             try
             {
                 AppKullanici girisYapacak = userManager.Find(kullanici.KullaniciAdi, kullanici.Sifre);
@@ -290,12 +296,34 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError("Hata", "İşlem onaylanırken bir hata oluştu!");
                 return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
 
+        }
+
+        [HttpGet]
+        [Route("KullaniciBilgi/{id}")]
+        public HttpResponseMessage KullaniciBilgi(string id)
+        {
+            try
+            {
+                AppKullanici kullanici = userManager.FindById(id);
+                if (kullanici == null)
+                {
+                    ModelState.AddModelError("Hata", "Kullanıcı bulunamadı.");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, kullanici);
+
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Hata","Kullanıcıya ulaşırken bir hata oluştu.");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
         }
 
     }

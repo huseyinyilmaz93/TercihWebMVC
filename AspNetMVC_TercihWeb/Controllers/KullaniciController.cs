@@ -26,9 +26,10 @@ namespace AspNetMVC_TercihWeb.Controllers
 
         [HttpGet]
         [Authorize(Roles = "KULLANICI")]
-        public void Cikis()
+        public ActionResult Cikis()
         {
             base.CikisYap();
+            return RedirectToAction("Index", "Site");
         }
 	}
 }

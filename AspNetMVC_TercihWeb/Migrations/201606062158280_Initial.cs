@@ -62,19 +62,8 @@ namespace AspNetMVC_TercihWeb.Migrations
                     {
                         IlceNo = c.Int(nullable: false, identity: true),
                         IlceAdi = c.String(),
-                        Iletisim_IletisimNo = c.Int(),
                     })
-                .PrimaryKey(t => t.IlceNo)
-                .ForeignKey("dbo.Iletisim", t => t.Iletisim_IletisimNo)
-                .Index(t => t.Iletisim_IletisimNo);
-            
-            CreateTable(
-                "dbo.Iletisim",
-                c => new
-                    {
-                        IletisimNo = c.Int(nullable: false, identity: true),
-                    })
-                .PrimaryKey(t => t.IletisimNo);
+                .PrimaryKey(t => t.IlceNo);
             
             CreateTable(
                 "dbo.Il",
@@ -82,36 +71,36 @@ namespace AspNetMVC_TercihWeb.Migrations
                     {
                         IlNo = c.Int(nullable: false, identity: true),
                         IlAdi = c.String(),
-                        Iletisim_IletisimNo = c.Int(),
                     })
-                .PrimaryKey(t => t.IlNo)
-                .ForeignKey("dbo.Iletisim", t => t.Iletisim_IletisimNo)
-                .Index(t => t.Iletisim_IletisimNo);
+                .PrimaryKey(t => t.IlNo);
             
             CreateTable(
                 "dbo.Lise",
                 c => new
                     {
                         LiseNo = c.Int(nullable: false, identity: true),
-                        OkulAdi = c.String(),
+                        LiseAdi = c.String(),
                         TabanPuani = c.Double(nullable: false),
-                        Iletisim_IletisimNo = c.Int(),
+                        Il_IlNo = c.Int(),
+                        Ilce_IlceNo = c.Int(),
                         Kategori_KategoriNo = c.Int(),
-                        OkulTuru_TurNo = c.Int(),
+                        LiseTuru_TurNo = c.Int(),
                         YabanciDil_DilNo = c.Int(),
                     })
                 .PrimaryKey(t => t.LiseNo)
-                .ForeignKey("dbo.Iletisim", t => t.Iletisim_IletisimNo)
+                .ForeignKey("dbo.Il", t => t.Il_IlNo)
+                .ForeignKey("dbo.Ilce", t => t.Ilce_IlceNo)
                 .ForeignKey("dbo.Kategori", t => t.Kategori_KategoriNo)
-                .ForeignKey("dbo.OkulTuru", t => t.OkulTuru_TurNo)
+                .ForeignKey("dbo.LiseTuru", t => t.LiseTuru_TurNo)
                 .ForeignKey("dbo.YabanciDil", t => t.YabanciDil_DilNo)
-                .Index(t => t.Iletisim_IletisimNo)
+                .Index(t => t.Il_IlNo)
+                .Index(t => t.Ilce_IlceNo)
                 .Index(t => t.Kategori_KategoriNo)
-                .Index(t => t.OkulTuru_TurNo)
+                .Index(t => t.LiseTuru_TurNo)
                 .Index(t => t.YabanciDil_DilNo);
             
             CreateTable(
-                "dbo.OkulTuru",
+                "dbo.LiseTuru",
                 c => new
                     {
                         TurNo = c.Int(nullable: false, identity: true),
@@ -160,6 +149,7 @@ namespace AspNetMVC_TercihWeb.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         Ad = c.String(),
                         Soyad = c.String(),
+                        SifremiUnuttum = c.DateTime(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -235,11 +225,10 @@ namespace AspNetMVC_TercihWeb.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Lise", "YabanciDil_DilNo", "dbo.YabanciDil");
-            DropForeignKey("dbo.Lise", "OkulTuru_TurNo", "dbo.OkulTuru");
+            DropForeignKey("dbo.Lise", "LiseTuru_TurNo", "dbo.LiseTuru");
             DropForeignKey("dbo.Lise", "Kategori_KategoriNo", "dbo.Kategori");
-            DropForeignKey("dbo.Lise", "Iletisim_IletisimNo", "dbo.Iletisim");
-            DropForeignKey("dbo.Il", "Iletisim_IletisimNo", "dbo.Iletisim");
-            DropForeignKey("dbo.Ilce", "Iletisim_IletisimNo", "dbo.Iletisim");
+            DropForeignKey("dbo.Lise", "Ilce_IlceNo", "dbo.Ilce");
+            DropForeignKey("dbo.Lise", "Il_IlNo", "dbo.Il");
             DropForeignKey("dbo.Universite", "Kategori_KategoriNo", "dbo.Kategori");
             DropForeignKey("dbo.UniversiteFakulte", "Fakulte_FakulteNo", "dbo.Fakulte");
             DropForeignKey("dbo.UniversiteFakulte", "Universite_UniversiteNo", "dbo.Universite");
@@ -256,11 +245,10 @@ namespace AspNetMVC_TercihWeb.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Lise", new[] { "YabanciDil_DilNo" });
-            DropIndex("dbo.Lise", new[] { "OkulTuru_TurNo" });
+            DropIndex("dbo.Lise", new[] { "LiseTuru_TurNo" });
             DropIndex("dbo.Lise", new[] { "Kategori_KategoriNo" });
-            DropIndex("dbo.Lise", new[] { "Iletisim_IletisimNo" });
-            DropIndex("dbo.Il", new[] { "Iletisim_IletisimNo" });
-            DropIndex("dbo.Ilce", new[] { "Iletisim_IletisimNo" });
+            DropIndex("dbo.Lise", new[] { "Ilce_IlceNo" });
+            DropIndex("dbo.Lise", new[] { "Il_IlNo" });
             DropIndex("dbo.Universite", new[] { "Kategori_KategoriNo" });
             DropTable("dbo.UniversiteFakulte");
             DropTable("dbo.FakulteBolum");
@@ -270,10 +258,9 @@ namespace AspNetMVC_TercihWeb.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.YabanciDil");
-            DropTable("dbo.OkulTuru");
+            DropTable("dbo.LiseTuru");
             DropTable("dbo.Lise");
             DropTable("dbo.Il");
-            DropTable("dbo.Iletisim");
             DropTable("dbo.Ilce");
             DropTable("dbo.Kategori");
             DropTable("dbo.Universite");

@@ -86,10 +86,10 @@ C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\Newtonsoft.Json.xml
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\System.Net.Http.Formatting.xml
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\System.Web.Http.xml
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\System.Web.Http.WebHost.xml
-C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.Migrations.Initial.resources
-C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.csproj.GenerateResource.Cache
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.dll
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.pdb
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.Migrations.Initial.resources
+C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.csproj.GenerateResource.Cache
 C:\Users\Hüseyin\TercihWebMVC\AspNetMVC_TercihWeb\obj\Debug\AspNetMVC_TercihWeb.csprojResolveAssemblyReference.cache

@@ -15,7 +15,7 @@ namespace AspNetMVC_TercihWeb.App_Start
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
-                LoginPath = new PathString("/Hesap/Giris")
+                LoginPath = new PathString("/Site/Index")
             });
         }
     }

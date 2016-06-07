@@ -21,7 +21,12 @@ namespace AspNetMVC_TercihWeb.DAL
         public DbSet<LiseTuru> LiseTurleri { get; set; }
 
         public DBContext() : base("DbConnect")
-        { }
+        {
+            //The 'ObjectContent`1' type failed to serialize the response body for content type 'application/json; charset=utf-8'.
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
+            //used for the error gets while calling 'http://localhost:52276/API/UniversitePuan/TumUniversiteler'
+        }
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

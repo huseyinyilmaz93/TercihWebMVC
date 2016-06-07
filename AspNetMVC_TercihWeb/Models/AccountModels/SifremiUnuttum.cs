@@ -9,6 +9,7 @@ namespace AspNetMVC_TercihWeb.Models.AccountModels
     public class SifremiUnuttum
     {
         [Required]
+        [Display(Name="Kullanıcı Adı")]
         public string KullaniciAdi { get; set; }
         [Required]
         [EmailAddress]

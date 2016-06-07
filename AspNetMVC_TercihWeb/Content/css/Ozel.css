@@ -1,0 +1,50 @@
+﻿@charset "utf-8";
+/* Css Custom */
+
+.header 
+{
+  float:inherit;
+}
+.m0
+{
+	margin-top:0px;
+}
+.margin0
+{
+	margin:0px;	
+}
+.fr{
+	float:right;
+	}
+.fl{
+	float:left;
+	}
+.mh {
+    max-width: 350px;
+}
+.colorRed{
+    color:red;
+}
+
+/* General sizing */
+ul.dropdown-lr {
+  width: 300px;
+}
+
+/* mobile fix */
+@media (max-width: 768px) {
+	.dropdown-lr h3 {
+		color: #eee;
+	}
+	.dropdown-lr label {
+		color: #eee;
+	}
+}
+
+heightwidth100{
+    width:100px;
+    height:100px;
+}
+.center {
+    text-align:center;
+}

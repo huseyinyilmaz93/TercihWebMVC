@@ -1,0 +1,91 @@
+﻿
+<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+    <div class="jumbotron fl col-md-9 col-lg-9 col-xs-12 col-sm-12 ml-15">
+        <h1>TERinizin hakkını öğrenin</h1>
+        <p>Terinizi soğutmadan Üniversite puanına bakıp, TERinizin hakkını verin.</p>
+        <p><a class="btn btn-primary btn-lg" href="HesapUni.html" role="button">Üniversitene Git</a></p>
+    </div>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 ml-15">
+            <div class="col-lg-12">
+                <div class="text-center"><h3><b>Giriş</b></h3></div>
+                <form>
+                    <div class="colorRed form-group">
+                        <div id="hataGiris" class="col-md-10">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="KullaniciAdi" id="KullaniciAdi" class="form-control" placeholder="Kullanıcı Adı">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="Sifre" id="Sifre" class="form-control" placeholder="Şifre" autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <input type="checkbox" name="BeniHatirla" id="BeniHatirla" />
+                                <label for="BeniHatirla"> Beni Hatırla</label><input type="hidden" id="CikisYap" />
+                            </div>
+                            <div class="col-xs-5 pull-right">
+                                <input id="btn_giris" type="button" name="login-submit" class="form-control btn btn-success" value="Giriş">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <a href="/Hesap/Kayit" class="Üye Ol">Üye Ol</a> |
+                                    <a href="/Hesap/SifremiUnuttum">ŞifremiUnuttum</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 ml-15">
+            <div class="text-center">
+                <input type="hidden" id="btn_giris" />
+                <h4 class="m0"><b>HOŞGELDİNİZ</b></h4>
+            </div>
+            <form>
+                <div class="form-group margin0">
+                    <div class="pull-left text-center">
+                        <img class="col-xs-11 img-circle heightwidth100" alt="tercihResim" src="~/Content/images/Ads%c4%b1z.png" />
+                        <label id="kullanici" class="text-center" for="username"></label>
+                    </div>
+                </div>
+
+                <div class="form-group margin0">
+                    <div class="row">
+                        <div class="col-xs-6 pull-right">
+                            <input id="CikisYap" type="button" class="form-control btn btn-danger" value="Çıkış Yap">
+                        </div>
+                        <div class="col-xs-6 pull-right">
+                            <input type="button" name="about" id="about" tabindex="4" class="form-control btn btn-success" value="Bilgilerim">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group margin0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <a href="/Hesap/SifreDegistir" class="ŞifreDegistir">Şifre Değiştir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</div>
+

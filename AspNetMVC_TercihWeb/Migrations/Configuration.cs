@@ -36,6 +36,7 @@ namespace AspNetMVC_TercihWeb.Migrations
             {
                 AppKullanici admin = new AppKullanici()
                 {
+                    SifremiUnuttum = DateTime.Now.AddHours(-3),
                     UserName = "admin",
                     EmailConfirmed = true
                 };
@@ -49,12 +50,13 @@ namespace AspNetMVC_TercihWeb.Migrations
 
             }
 
-           
+
 
             if (userManager.Find("kullanici", "kullanici123") == null)
             {
                 AppKullanici kullanici = new AppKullanici()
                 {
+                    SifremiUnuttum = DateTime.Now.AddHours(-3),
                     UserName = "kullanici",
                     EmailConfirmed = true
                 };
@@ -69,7 +71,8 @@ namespace AspNetMVC_TercihWeb.Migrations
             }
 
 
-            
+
         }
+
     }
 }

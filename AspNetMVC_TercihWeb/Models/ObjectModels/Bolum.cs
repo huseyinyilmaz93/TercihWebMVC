@@ -25,7 +25,7 @@ namespace AspNetMVC_TercihWeb.Models.ObjectModels
         [Display(Name = "Okul Birincisi En Yüksek Puan")]
         public double OkulEnYuksekPuan { get; set; }
 
-        public virtual ICollection<Fakulte> Fakulteler { get; set; }
+        public virtual Fakulte Fakulte { get; set; }
 
     }
 }
