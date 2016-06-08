@@ -28,13 +28,91 @@ namespace AspNetMVC_TercihWeb._WEBAPI
             userManager = new UserManager<AppKullanici>(userStore);
         }
 
-        [Route("Kayit")]
+        [HttpGet]
+        [Route("TumKullanicilar")]
+        public HttpResponseMessage TumKullanicilar()
+        {
+            try
+            {
+                List<AppKullanici> kullanicilar = new List<AppKullanici>();
+                foreach (AppKullanici kullanici in db.Users)
+                {
+                    if (kullanici.UserName == "admin") continue;
+                    kullanicilar.Add(kullanici);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK,kullanicilar);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        [Route("KullaniciEkle/{mailGonder}")]
         [HttpPost]
-        public HttpResponseMessage Kayit([FromBody]Kayit kullanici)
+        public HttpResponseMessage KullaniciEkle([FromBody]Kayit kullanici,string mailGonder)
         {
             if (kullanici == null)
             {
                 ModelState.AddModelError("Hata","Form bilgileri boş geçilemez");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            if (userManager.FindByName(kullanici.KullaniciAdi) != null)
+            {
+                ModelState.AddModelError("Hata", "Bu kullanıcı adı başka bir kullanıcı tarafından kullanılmaktadır!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+            else if (userManager.FindByEmail(kullanici.Email) != null)
+            {
+                ModelState.AddModelError("Hata", "Girilen Email başka bir kullanıcı tarafından kullanılmaktadır!");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+
+            AppKullanici yeniKullanici = new AppKullanici();
+            yeniKullanici.Ad = kullanici.Ad;
+            yeniKullanici.Soyad = kullanici.Soyad;
+            yeniKullanici.UserName = kullanici.KullaniciAdi;
+            yeniKullanici.Email = kullanici.Email;
+            if (mailGonder == "true") yeniKullanici.EmailConfirmed = true;
+            else yeniKullanici.EmailConfirmed = false;
+            
+            
+            yeniKullanici.SifremiUnuttum = DateTime.Now;
+            yeniKullanici.SifremiUnuttum = yeniKullanici.SifremiUnuttum.AddHours(-3);
+
+            try
+            {
+                IdentityResult idtResult = userManager.Create(yeniKullanici, kullanici.Sifre);
+                if (idtResult.Succeeded)
+                {
+                    userManager.AddToRole(yeniKullanici.Id, "KULLANICI");
+                    if(mailGonder == "true") MailGonder.EMailOnaylama(yeniKullanici);
+                    return Request.CreateResponse(HttpStatusCode.OK,yeniKullanici.Id);
+                }
+                else
+                {
+                    ModelState.AddModelError("Hata", "Kullanıcıya rol atanamadı!");
+                    return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Hata", e.Message + " Kullanıcıyı kaydederken bir hata meydana geldi.");
+                return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
+            }
+        }
+
+        public HttpResponseMessage Kayit([FromBody]Kayit kullanici)
+        {
+            if (kullanici == null)
+            {
+                ModelState.AddModelError("Hata", "Form bilgileri boş geçilemez");
                 return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
             if (!ModelState.IsValid)
@@ -68,7 +146,7 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                 if (idtResult.Succeeded)
                 {
                     userManager.AddToRole(yeniKullanici.Id, "KULLANICI");
-                    return Request.CreateResponse(HttpStatusCode.OK,yeniKullanici.Id);
+                    return Request.CreateResponse(HttpStatusCode.OK, yeniKullanici.Id);
                 }
                 else
                 {
@@ -323,6 +401,22 @@ namespace AspNetMVC_TercihWeb._WEBAPI
             {
                 ModelState.AddModelError("Hata","Kullanıcıya ulaşırken bir hata oluştu.");
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
+
+        [HttpGet]
+        [Route("KullaniciSil/{id}")]
+        public HttpResponseMessage KullaniciSil(string id)
+        {
+            try
+            {
+                AppKullanici kullanici = userManager.FindById(id);
+                db.Users.Remove(kullanici);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Hata");
             }
         }
 

@@ -4,51 +4,101 @@
     ViewBag.Title = "Giris";
 }
 
-<h2>Giris</h2>
 <script src="~/Scripts/Hesap/giris.js"></script>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Giris</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+@*
+        <h2>Giris</h2>
 
-        <div class="form-group">
-            <div style="color:red" id="hata" class="col-md-10">
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Giris</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div style="color:red" id="hata" class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.KullaniciAdi)
+                    @Html.ValidationMessageFor(model => model.KullaniciAdi)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sifre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Sifre)
+                    @Html.ValidationMessageFor(model => model.Sifre)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BeniHatirla, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BeniHatirla, new { id = "beniHatirla" })
+                    @Html.ValidationMessageFor(model => model.BeniHatirla)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div id="btn_giris" class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Giriş Yap" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.KullaniciAdi)
-                @Html.ValidationMessageFor(model => model.KullaniciAdi)
-            </div>
-        </div>
+<div class="row">
+    <div class="ml15">
+        @Html.Partial("PartialDuyuru")
+    </div>
+    <div class="fr col-md-7 col-lg-7 col-xs-12 col-sm-12">
+        <div class="col-lg-12">
+            <div class="text-center"><h3><b>Giriş</b></h3></div>
+            <form>
+                <div class="colorRed form-group">
+                    <div id="hata" class="col-md-10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="KullaniciAdi" id="KullaniciAdi" class="form-control" placeholder="Kullanıcı Adı">
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sifre, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Sifre)
-                @Html.ValidationMessageFor(model => model.Sifre)
-            </div>
-        </div>
+                <div class="form-group">
+                    <input type="password" name="Sifre" id="Sifre" class="form-control" placeholder="Şifre" autocomplete="off">
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BeniHatirla, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BeniHatirla, new { id = "beniHatirla" })
-                @Html.ValidationMessageFor(model => model.BeniHatirla)
-            </div>
-        </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <input type="checkbox" name="BeniHatirla" id="BeniHatirla" />
+                            <label for="BeniHatirla"> Beni Hatırla</label><input type="hidden" id="CikisYap" />
+                        </div>
+                        <div class="col-xs-5 pull-right">
+                            <input id="btn_giris" type="button" name="login-submit" class="form-control btn btn-success" value="Giriş">
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div id="btn_giris" class="col-md-offset-2 col-md-10">
-                <input type="button" value="Giriş Yap" class="btn btn-default" />
-            </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <a href="/Hesap/Kayit" class="Üye Ol">Üye Ol</a> |
+                                <a href="/Hesap/SifremiUnuttum">ŞifremiUnuttum</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-}
+</div>

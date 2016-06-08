@@ -12,6 +12,8 @@ namespace AspNetMVC_TercihWeb.DAL
         public DbSet<Fakulte> Fakulteler { get; set; }
         public DbSet<Bolum> Bolumler { get; set; }
 
+        public DbSet<Tercih> Tercihler { get; set; }
+
         public DbSet<Kategori> Kategoriler { get; set; }
 
         public DbSet<Lise> Liseler { get; set; }

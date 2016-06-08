@@ -1,7 +1,11 @@
-﻿.description {
+﻿body {
+}
+.description {
     text-align:center;
 }
-
+.width{
+	width:342px;
+}
 .textboxes {
     width:38px;}
 .tablePuan {

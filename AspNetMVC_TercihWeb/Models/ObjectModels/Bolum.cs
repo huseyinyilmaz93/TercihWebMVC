@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AspNetMVC_TercihWeb.Models.MembershipModels;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AspNetMVC_TercihWeb.Models.ObjectModels
@@ -26,6 +27,7 @@ namespace AspNetMVC_TercihWeb.Models.ObjectModels
         public double OkulEnYuksekPuan { get; set; }
 
         public virtual Fakulte Fakulte { get; set; }
+        public virtual List<Tercih> Tercihler { get; set; }
 
     }
 }

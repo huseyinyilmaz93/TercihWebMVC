@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "TercihListesi";
+}
+
+<script src="~/Scripts/Kullanici/tercihListesi.js"></script>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h2>Tercih Listem</h2>
+    <input type="hidden" id="id" value="@ViewBag.id" />
+    <table>
+        <thead>
+            <tr>
+                <th>Bölüm Kodu</th>
+                <th>Üniversite Adı</th>
+                <th>Fakülte Adı</th>
+                <th>Bölüm Adı</th>
+                <th>Puan Türü</th>
+                <th>Yerleşen</th>
+                <th>Kontenjan</th>
+                <th>En Yüksek Puan (Okul Birincisi)</th>
+                <th>En Düşük Puan (Okul Birincisi)</th>
+                <th>En Yüksek Puan</th>
+                <th>En Düşük Puan</th>
+            </tr>
+        </thead>
+        <tbody id="kayitlar"></tbody>
+    </table>
+</div>

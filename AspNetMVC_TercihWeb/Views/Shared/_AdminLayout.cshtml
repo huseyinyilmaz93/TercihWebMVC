@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/admin.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body class="bContain">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-7 column hosgldn "> <span class="buyuk hidden-xs">Site Yönetim Paneli</span></div>
+        <div class="col-lg-5 column admintaraf ortala">
+            <table class="tbl">
+                <tr>
+                    <td>
+                        <img alt="admin image" class="img-circle enboy" src="~/Content/images/admin.png" />
+                    </td>
+                    <td class="pad20">
+                        <button type="button" class="btn btn-warning btn-md aralik">Şifre Değiştir</button>
+                        <button type="button" class="btn btn-danger btn-md ">Çıkış</button>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+        <div style="margin-left:0px" class="kaydir uzat buyut arka leftbar ml15">
+            <div class="row">
+                <div class="col-md-3 col-xs-12 col-sm-3 col-lg-3 padding0 sidebar">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation"><a href="/Admin/Index"><span class="glyphicon glyphicon-home"> </span> Admin Index</a></li>
+                        <li role="presentation"><a href="/Admin/Kullanicilar"><span class="glyphicon glyphicon-pushpin"> </span> Tüm Kullanıcılar</a></li>
+                        <li role="presentation"><a href="/Admin/KullaniciEkle"><span class="glyphicon glyphicon-home"> </span> Kullanıcı Ekle</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-8 col-lg-8 bContent">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div>
+        @Html.Partial("PartialFooter")
+    </div>
+</body>
+</html>

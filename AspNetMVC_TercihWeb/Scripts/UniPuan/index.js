@@ -125,6 +125,19 @@
         KayitSayisi = parseInt(this.value);
         fnc_IstekYap();
     }
+    function fnc_OgrenciyeEkle() {
+        $.ajax({
+            type: "GET",
+            url: "/API/Tercih/TercihEkle/" + document.getElementById("id").value + "/" + this.id,
+            contentType: "application/json",
+            success: function () {
+                alert("Bölüm eklendi");
+            },
+            error: function () {
+                alert("Bölüm zaten listenizde bulunmakta")
+            }
+        });
+    }
 
     function fnc_IstekYap() {
         var AramaKelime = document.getElementById("aramaKelime").value;
@@ -198,6 +211,20 @@
                         var tdEnDusuk = document.createElement("td");
                         tdEnDusuk.appendChild(document.createTextNode(Math.round(data[i].EnDusukPuan * 100) / 100));
                         tr.appendChild(tdEnDusuk);
+
+                        if (document.getElementById("id").value) {
+                            var tdEkle = document.createElement("td");
+                            var buton = document.createElement("input");
+                            buton.value = "Ekle";
+                            buton.type = "button";
+                            
+                            buton.id = data[i].BolumKodu;
+                            buton.classList.add("form-control");
+                            buton.addEventListener("click", fnc_OgrenciyeEkle);
+                            tdEkle.appendChild(buton);
+                            tr.appendChild(tdEkle);
+                        }
+                        
 
                         kayitlar.appendChild(tr);
                     }

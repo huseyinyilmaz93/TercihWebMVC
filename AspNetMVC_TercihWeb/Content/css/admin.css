@@ -1,0 +1,144 @@
+﻿bContain {
+    font: normal 36px 'Cookie', cursive !important;
+    background-image:url('http://a-connect.co.uk/wp-content/uploads/background1.jpg');
+}
+.colorRed {
+    color:red;
+}
+userPng{
+    margin-left:10%;
+}
+bKullaniciEkle {
+    margin-top:25px;
+    float:left;
+}
+bContent {
+    min-height:500px;
+}
+body {
+	background-color:#DDDDDD ;
+	color:black;
+	font-weight:bold;
+}
+.mavi, a{
+	color:white !important;
+}
+a:hover{
+	color:#808080 !important;
+}
+
+.leftbar {
+	border-radius:20px;
+	text-align:Center;
+}
+.h500{
+	height:500px;
+}
+.column{
+	height:100px;	
+}
+
+.nav-stacked > li{
+	text-decoration:bold;
+	background-color:#808080;
+	margin:0px;
+	padding:0px;
+}
+.hosgldn{
+	background-color:#808080;
+	font-size:20px;
+	color:#CCCCFF;
+	text-align:center;
+	padding-top:10px;
+}
+span.buyuk{
+	font-size:50px;
+}
+.admin{
+	font-size:55px;
+	color:#CCCCFF;
+}
+.admintaraf{
+	background-color:#808080;
+}
+.ortala{
+	text-align:center;
+	padding:15px;
+}
+.ml-15{
+    margin-left:-15px;
+}
+.buyut{
+	font-size:20px;	
+}
+.kaydir{
+	margin-left:-15px;
+}
+.uzat{
+	height:100%;
+}
+.aralik{
+	word-spacing:1px;
+}
+.padding0{
+	padding:0;
+}
+.footer{
+	position:fixed;
+	bottom:0px;
+	text-align:center;
+}
+
+.sidebar{
+	background-color:#808080;
+}
+.margin0{
+	margin:0;
+}
+.arka{
+
+}
+.center{
+	text-align:center;
+}
+.pad{
+	padding-left:80px;
+}
+.tabl{
+	border-color:black;
+}
+.wit{
+	width:80%;
+	border:1px;
+	text-align:left;
+	float:right;
+	
+}
+.tbl{
+	float:left;
+	margin-right:100px;
+}
+.enboy{
+	width:80px;
+	height:80px
+}
+.pad20{
+	padding:20px;
+}
+.copy{
+	background-color:#808080;
+	color:white;
+}
+th{
+	width:1000px;
+}
+.yan{
+	padding-left:100px;
+}
+.ayar{
+	width:250px;
+	height:250px;
+	margin-left:170px;
+	text-align:center;
+	padding-left:100px;
+}

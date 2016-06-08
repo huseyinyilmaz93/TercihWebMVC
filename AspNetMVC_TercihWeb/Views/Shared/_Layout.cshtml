@@ -8,7 +8,6 @@
     <link href="~/Content/css/Ozel.css" rel="stylesheet" />
     <link href="~/Content/css/reset.css" rel="stylesheet" />
     <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/css/footer.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
 <body>
@@ -33,19 +32,24 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="/Site/Index">Anasayfa <span class="sr-only">Varsayılan</span></a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hesapla <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="HesapUni.html">Üniversite Puanı</a></li>
-                                    <li><a href="HesapLise.html">Lise Puanı</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="/UniPuan/Index">Üniversite Puanları</a></li>
+                            <li><a href="/UniPuan/PuanHesaplama">Üniversite Puan Hesaplama</a></li>
+                            <li><a href="/LisePuan/PuanHesaplama">Lise Puan Hesaplama</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li><a href="/Kullanici/Index">Benim Sayfam</a></li>
-                                <li><a href="/Kullanici/Cikis">Çıkış Yap</a></li>
+                                if (User.Identity.GetUserName() != "admin")
+                                {
+                                    <li><a href="/Kullanici/Index">Benim Sayfam</a></li>
+                                    <li><a href="/Kullanici/Cikis">Çıkış Yap</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Admin/Index">Benim Sayfam</a></li>
+                                    <li><a href="/Admin/Cikis">Çıkış Yap</a></li>                                    
+                                }
+
                             }
                             else
                             {
@@ -60,27 +64,7 @@
         </header>
         @RenderBody()
     </div>
-    <div class="clearfix"></div> <!--END OF CONTENT || FOOTER BEGINS -->
-    <footer class="footer-distributed">
-        <div class="footer-left">
-            <h3>Tercih<span>WEB</span></h3>
-            <p class="footer-links">
-                <a href="~/Site/Index">Anasayfa</a>
-                ·
-                <a href="~/UniPuan/Index">Üniversite Puan Hesaplama</a>
-                ·
-                <a href="~/LisePuan/Index">Lise Puan Hesaplama</a>
-                ·
-                <a href="~/UniPuan/Puanlar">Üniversite Puanları</a>
-                ·
-                <a href="~/LisePuan/Puanlar">Lise Puanları</a>
-            </p>
-            <p class="footer-company-name">TercihWEB &copy; 2016</p>
-            <div class="footer-icons">
-
-            </div>
-        </div>
-    </footer>
+    @Html.Partial("PartialFooter")
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/jquery-2.2.4.min.js"></script>
 </body>

@@ -31,5 +31,12 @@ namespace AspNetMVC_TercihWeb.Controllers
             base.CikisYap();
             return RedirectToAction("Index", "Site");
         }
+
+        [Authorize(Roles="KULLANICI")]
+        public ActionResult TercihListesi()
+        {
+            ViewBag.id = User.Identity.GetUserId();
+            return View();
+        }
 	}
 }

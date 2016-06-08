@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "KullaniciEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="~/Scripts/Admin/kullaniciEkle.js"></script>
+<div class="BKullaniciEkle col-md-9 col-xs-12 col-sm-9 col-lg-9">
+    <form class="form-horizontal">
+        <div class="form-group ">
+            <div id="hata" class=" colorRed col-md-10">
+            </div>
+        </div>
+        <div class="form-group has-success">
+            <label for="ad">Adı</label>
+            <input type="text" class="form-control" id="Ad" placeholder="Adı Giriniz">
+        </div>
+        <div class="form-group has-success">
+            <label for="soyad">Soyadı</label>
+            <input type="text" class="form-control" id="Soyad" placeholder="Soyadı Giriniz">
+        </div>
+        <div class="form-group has-success">
+            <label for="kullanıcıadi">Kullanıcı Adı</label>
+            <input type="text" class="form-control" id="KullaniciAdi" placeholder="Kullanıcı Adını Giriniz">
+        </div>
+        <div class="form-group has-success">
+            <label for="e-mail">Email Adresi</label>
+            <input type="text" class="form-control" id="Email" placeholder="Email Adresini Giriniz">
+        </div>
+        <div class="form-group has-success">
+            <label for="sifre">Şifre</label>
+            <input type="password" class="form-control" id="Sifre" placeholder="Şifre">
+        </div>
+        <div class="form-group has-success">
+            <label for="sifreTekrar">Şifre Tekrar</label>
+            <input type="password" class="form-control" id="SifreTekrar" placeholder="Şifre Tekrar">
+        </div>
+        <div class="form-group">
+            <label for="e-mail">E-mail Uyarısı Gönder</label>
+            <div class="checkbox">
+                <label><input name="mailGonderme" type="radio" id="secim1" value="gonder" checked="checked">Gönder</label>
+            </div>
+            <div class="checkbox">
+                <label><input name="mailGonderme" type="radio" id="secim2" value="gonderme">Gönderme</label>
+            </div>
+
+        </div>
+        <button id="btn_kaydet" type="button" style="width:100%;" class="btn btn-primary btn-lg btn-block">KAYDET</button>
+    </form>
+</div>

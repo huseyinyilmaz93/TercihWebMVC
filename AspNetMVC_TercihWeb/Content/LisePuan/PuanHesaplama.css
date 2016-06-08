@@ -1,17 +1,23 @@
-﻿.textboxes {
+﻿body {
+}
+
+.textboxes {
     width:38px;
 }
 
 .description {
     text-align:center;
 }
-
+.width{
+	width:340px;
+}
 .sonuc{
     font-weight : bold;
     width:400px;
 }
 
 .myButton {
+    align-content:center;
     text-align:center;
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;

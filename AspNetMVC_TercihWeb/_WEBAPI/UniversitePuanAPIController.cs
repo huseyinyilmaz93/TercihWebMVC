@@ -94,7 +94,8 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                                     OkulEnYuksekPuan = bolum.OkulEnYuksekPuan,
                                     BolumKodu= bolum.BolumKodu, EnDusukPuan = bolum.EnDusukPuan,
                                     EnYuksekPuan=bolum.EnYuksekPuan, FakulteNo = fakulte.FakulteNo,
-                                    UniversiteNo  = universite.UniversiteNo}).ToList();
+                                    UniversiteNo  = universite.UniversiteNo
+                                    }).ToList();
 
             if (filtre.UniversiteNo != 0)
             {

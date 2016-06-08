@@ -1,6 +1,11 @@
 ﻿@charset "utf-8";
 /* Css Custom */
-
+.ml15{
+    margin-left:15px;
+}
+.padding0{
+    padding:0px;
+}
 .header 
 {
   float:inherit;
