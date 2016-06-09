@@ -13,6 +13,7 @@ namespace AspNetMVC_TercihWeb.DAL
         public DbSet<Bolum> Bolumler { get; set; }
 
         public DbSet<Tercih> Tercihler { get; set; }
+        public DbSet<UniFakBol> UniFakBol { get; set; }
 
         public DbSet<Kategori> Kategoriler { get; set; }
 

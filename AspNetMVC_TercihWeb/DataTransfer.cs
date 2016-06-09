@@ -188,31 +188,31 @@ namespace AspNetMVC_TercihWeb
                 rdr.Close();
                 db.SaveChanges();
             }
-            //{ //UNIFAK
-            //    SqlCommand cmd = new SqlCommand("select * from UniFak", con);
-            //    SqlDataReader rdr;
-            //    rdr = cmd.ExecuteReader();
+            { //UNIFAK
+                SqlCommand cmd = new SqlCommand("select * from UniFak", con);
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
 
-            //    while (rdr.Read())
-            //    {
-            //        int uniNo = rdr.GetInt32(0);
-            //        int fakNo = rdr.GetInt32(1);
-            //        Fakulte f = (from fak in db.Fakulteler.Include("Universiteler")
-            //                     where fak.FakulteNo == fakNo
-            //                     select fak).FirstOrDefault();
+                while (rdr.Read())
+                {
+                    int uniNo = rdr.GetInt32(0);
+                    int fakNo = rdr.GetInt32(1);
+                    Fakulte f = (from fak in db.Fakulteler.Include("Universiteler")
+                                 where fak.FakulteNo == fakNo
+                                 select fak).FirstOrDefault();
 
-            //        Universite u = (from uni in db.Universiteler.Include("Fakulteler")
-            //                        where uni.UniversiteNo == uniNo
-            //                        select uni).FirstOrDefault();
-                    
-            //        if (u.Fakulteler == null) u.Fakulteler = new List<Fakulte>();
-            //        if (f != null && u != null)
-            //            f.Universiteler.Add(u);
+                    Universite u = (from uni in db.Universiteler.Include("Fakulteler")
+                                    where uni.UniversiteNo == uniNo
+                                    select uni).FirstOrDefault();
 
-            //    }
-            //    rdr.Close();
-            //    db.SaveChanges();
-            //}
+                    if (u.Fakulteler == null) u.Fakulteler = new List<Fakulte>();
+                    if (f != null && u != null)
+                        f.Universiteler.Add(u);
+
+                }
+                rdr.Close();
+                db.SaveChanges();
+            }
             { //UNIFAKBOL
                 SqlCommand cmd = new SqlCommand("select * from UniFakBol", con);
                 SqlDataReader rdr;
@@ -223,14 +223,19 @@ namespace AspNetMVC_TercihWeb
                     int uniNo = rdr.GetInt32(0);
                     string bolKodu = rdr.GetString(2);
                     int fakNo = rdr.GetInt32(1);
-                    Fakulte f = (from fak in db.Fakulteler.Include("Universiteler")
-                                 from univ in fak.Universiteler
-                                 where fak.FakulteNo == fakNo && uniNo == univ.UniversiteNo
-                                 select fak).FirstOrDefault();
+
+                    Universite u = (from universite in db.Universiteler
+                                    where universite.UniversiteNo == uniNo
+                                    select universite).FirstOrDefault(); 
+
+                    Fakulte f = (from fakulte in db.Fakulteler
+                                 where fakulte.FakulteNo == fakNo
+                                 select fakulte).FirstOrDefault();
 
                     Bolum b = (from bol in db.Bolumler
                                where bol.BolumKodu == bolKodu
                                select bol).FirstOrDefault();
+
                     if(b.Fakulte == null)
                     {
                         b.Fakulte = f;
@@ -267,63 +272,63 @@ namespace AspNetMVC_TercihWeb
             con.Open();
             
             Method2(con,db);
-            Method3(con,db);
+            //Method3(con,db);
 
-            { //LİSE 
-                SqlCommand cmd = new SqlCommand("select okulNo,okulAdi,tabanPuani,ilNo,ilceNo,turNo,dilNo from Okul INNER JOIN Iletisim ON Okul.iletNo=Iletisim.iletNo   ", con);
+            //{ //LİSE 
+            //    SqlCommand cmd = new SqlCommand("select okulNo,okulAdi,tabanPuani,ilNo,ilceNo,turNo,dilNo from Okul INNER JOIN Iletisim ON Okul.iletNo=Iletisim.iletNo   ", con);
 
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
+            //    SqlDataReader rdr;
+            //    rdr = cmd.ExecuteReader();
 
-                while (rdr.Read())
-                {
+            //    while (rdr.Read())
+            //    {
 
-                    string liseAdi = rdr.GetString(1);
-                    float tabanPuan = rdr.GetFloat(2);
-                    int ilNo = rdr.GetInt32(3);
-                    int ilceNo = rdr.GetInt32(4);
-                    int turNo = rdr.GetInt32(5);
-                    int dilNo = rdr.GetInt32(6);
+            //        string liseAdi = rdr.GetString(1);
+            //        float tabanPuan = rdr.GetFloat(2);
+            //        int ilNo = rdr.GetInt32(3);
+            //        int ilceNo = rdr.GetInt32(4);
+            //        int turNo = rdr.GetInt32(5);
+            //        int dilNo = rdr.GetInt32(6);
 
-                    Lise lise = (from l in db.Liseler
-                                 where l.LiseAdi == liseAdi
-                                 select l).FirstOrDefault();
-                    Lise yeniLise = new Lise();
-                    yeniLise.LiseAdi = liseAdi;
-                    yeniLise.TabanPuani = tabanPuan;
+            //        Lise lise = (from l in db.Liseler
+            //                     where l.LiseAdi == liseAdi
+            //                     select l).FirstOrDefault();
+            //        Lise yeniLise = new Lise();
+            //        yeniLise.LiseAdi = liseAdi;
+            //        yeniLise.TabanPuani = tabanPuan;
 
-                    YabanciDil ydil = (from yd in db.YabanciDiller
-                                       where yd.DilNo == dilNo
-                                       select yd).FirstOrDefault();
-                    LiseTuru ltur = (from lt in db.LiseTurleri
-                                     where lt.TurNo == turNo
-                                     select lt).FirstOrDefault();
-                    Kategori kategori = (from k in db.Kategoriler
-                                         where k.KategoriAdi == "Lise"
-                                         select k).FirstOrDefault();
+            //        YabanciDil ydil = (from yd in db.YabanciDiller
+            //                           where yd.DilNo == dilNo
+            //                           select yd).FirstOrDefault();
+            //        LiseTuru ltur = (from lt in db.LiseTurleri
+            //                         where lt.TurNo == turNo
+            //                         select lt).FirstOrDefault();
+            //        Kategori kategori = (from k in db.Kategoriler
+            //                             where k.KategoriAdi == "Lise"
+            //                             select k).FirstOrDefault();
 
-                    yeniLise.Kategori = kategori;
+            //        yeniLise.Kategori = kategori;
 
-                    yeniLise.YabanciDil = ydil;
-                    yeniLise.LiseTuru = ltur;
+            //        yeniLise.YabanciDil = ydil;
+            //        yeniLise.LiseTuru = ltur;
 
-                    Il il = (from i in db.Iller
-                             where i.IlNo == ilNo
-                             select i).FirstOrDefault();
+            //        Il il = (from i in db.Iller
+            //                 where i.IlNo == ilNo
+            //                 select i).FirstOrDefault();
 
-                    Ilce ilce = (from ilc in db.Ilceler
-                             where ilc.IlceNo == ilceNo
-                             select ilc).FirstOrDefault();
+            //        Ilce ilce = (from ilc in db.Ilceler
+            //                 where ilc.IlceNo == ilceNo
+            //                 select ilc).FirstOrDefault();
 
-                    yeniLise.Il = il;
-                    yeniLise.Ilce = ilce;
+            //        yeniLise.Il = il;
+            //        yeniLise.Ilce = ilce;
 
-                    if (lise == null)
-                        db.Liseler.Add(yeniLise);
-                }
-                rdr.Close();
-                db.SaveChanges();
-            }
+            //        if (lise == null)
+            //            db.Liseler.Add(yeniLise);
+            //    }
+            //    rdr.Close();
+            //    db.SaveChanges();
+            //}
 
         }
 

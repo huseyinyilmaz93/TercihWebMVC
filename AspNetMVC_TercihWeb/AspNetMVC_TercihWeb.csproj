@@ -214,6 +214,7 @@
     <Compile Include="Models\ObjectModels\Lise.cs" />
     <Compile Include="Models\ObjectModels\LiseTuru.cs" />
     <Compile Include="Models\ObjectModels\Tercih.cs" />
+    <Compile Include="Models\ObjectModels\UniFakBol.cs" />
     <Compile Include="Models\ObjectModels\Universite.cs" />
     <Compile Include="Models\ObjectModels\YabanciDil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,6 +12,8 @@ using System.Web.Http;
 using Microsoft.Owin.Host.SystemWeb;
 using AspNetMVC_TercihWeb.Models;
 using System.Threading.Tasks;
+using AspNetMVC_TercihWeb.Models.ObjectModels;
+using System.Linq;
 
 namespace AspNetMVC_TercihWeb._WEBAPI
 {
@@ -79,8 +81,8 @@ namespace AspNetMVC_TercihWeb._WEBAPI
             yeniKullanici.Soyad = kullanici.Soyad;
             yeniKullanici.UserName = kullanici.KullaniciAdi;
             yeniKullanici.Email = kullanici.Email;
-            if (mailGonder == "true") yeniKullanici.EmailConfirmed = true;
-            else yeniKullanici.EmailConfirmed = false;
+            if (mailGonder == "true") yeniKullanici.EmailConfirmed = false;
+            else yeniKullanici.EmailConfirmed = true;
             
             
             yeniKullanici.SifremiUnuttum = DateTime.Now;
@@ -107,7 +109,9 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                 return Request.CreateErrorResponse(HttpStatusCode.MethodNotAllowed, ModelState);
             }
         }
-
+        
+        [HttpPost]
+        [Route("Kayit")]
         public HttpResponseMessage Kayit([FromBody]Kayit kullanici)
         {
             if (kullanici == null)
@@ -224,7 +228,7 @@ namespace AspNetMVC_TercihWeb._WEBAPI
             try
             {
                 AppKullanici sifreDegisecek = userManager.FindById(id);
-                AppKullanici sifreKontrol = userManager.Find(sifreDegisim.KullaniciAdi, sifreDegisim.YeniSifre);
+                AppKullanici sifreKontrol = userManager.Find(sifreDegisim.KullaniciAdi, sifreDegisim.EskiSifre);
                 if (sifreKontrol == null)
                 {
                     ModelState.AddModelError("Hata", "Lütfen Eski Sifre alanını kontrol edin. Yanlış giriş yapıldı");
@@ -410,8 +414,18 @@ namespace AspNetMVC_TercihWeb._WEBAPI
         {
             try
             {
+
                 AppKullanici kullanici = userManager.FindById(id);
+                List<Tercih> tercihler = (from tercih in db.Tercihler.Include("Kullanici")
+                                          where tercih.Kullanici.Id == id
+                                          select tercih).ToList();
+                foreach (var item in tercihler)
+                {
+                    db.Tercihler.Remove(item);
+                }
+                db.SaveChanges();
                 db.Users.Remove(kullanici);
+                db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception)

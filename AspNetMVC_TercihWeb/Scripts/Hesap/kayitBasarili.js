@@ -1,8 +1,8 @@
 ﻿"use strict";
 (function () {
     window.onload = function () {
-        var id = document.getElementById("id").value;
-        console.log("123");
+        var id = document.getElementById("kId").value;
+        console.log(id);
         $.ajax({
             type: "GET",
             url: "/API/Hesap/KayitBasarili/" + id,
@@ -15,7 +15,6 @@
             }
         });
 
-        console.log("aaaaaaa");
     }
 }
 )();

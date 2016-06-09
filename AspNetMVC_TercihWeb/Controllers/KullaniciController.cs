@@ -24,7 +24,6 @@ namespace AspNetMVC_TercihWeb.Controllers
             base.GirisYap(kullanici);
         }
 
-        [HttpGet]
         [Authorize(Roles = "KULLANICI")]
         public ActionResult Cikis()
         {

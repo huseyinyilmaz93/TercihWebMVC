@@ -29,26 +29,25 @@ namespace AspNetMVC_TercihWeb._WEBAPI
                                           select tercih.Bolum).ToList();
                 List<FiltreModel> tercihler = new List<FiltreModel>();
                 foreach(Bolum bolum in bolumler) {
-                    FiltreModel tercih = (from fakulte in db.Fakulteler.Include("Universiteler").Include("Fakulteler")
-                                                  from bol in fakulte.Bolumler
-                                                  from universite in fakulte.Universiteler
-                                                  where bol.BolumKodu == bolum.BolumKodu
-                                                  select new FiltreModel
-                                                  {
-                                                      BolumAdi = bol.BolumAdi,
-                                                      UniversiteAdi = universite.UniversiteAdi,
-                                                      FakulteAdi = fakulte.FakulteAdi,
-                                                      Kontenjan = bol.Kontenjan,
-                                                      PuanTuru = bol.PuanTuru,
-                                                      Yerlesen = bol.Yerlesen,
-                                                      OkulEnDusukPuan = bol.OkulEnDusukPuan,
-                                                      OkulEnYuksekPuan = bol.OkulEnYuksekPuan,
-                                                      BolumKodu = bol.BolumKodu,
-                                                      EnDusukPuan = bol.EnDusukPuan,
-                                                      EnYuksekPuan = bol.EnYuksekPuan,
-                                                      FakulteNo = fakulte.FakulteNo,
-                                                      UniversiteNo = universite.UniversiteNo
-                                                  }).FirstOrDefault();
+                    FiltreModel tercih = (from ufb in db.UniFakBol.Include("Universite").Include("Fakulte").Include("Bolum")
+                                          where bolum.BolumKodu == ufb.Bolum.BolumKodu
+                                          orderby ufb.Bolum.EnDusukPuan descending
+                                          select new FiltreModel
+                                          {
+                                              BolumAdi = ufb.Bolum.BolumAdi,
+                                              UniversiteAdi = ufb.Universite.UniversiteAdi,
+                                              FakulteAdi = ufb.Fakulte.FakulteAdi,
+                                              Kontenjan = ufb.Bolum.Kontenjan,
+                                              PuanTuru = ufb.Bolum.PuanTuru,
+                                              Yerlesen = ufb.Bolum.Yerlesen,
+                                              OkulEnDusukPuan = ufb.Bolum.OkulEnDusukPuan,
+                                              OkulEnYuksekPuan = ufb.Bolum.OkulEnYuksekPuan,
+                                              BolumKodu = ufb.Bolum.BolumKodu,
+                                              EnDusukPuan = ufb.Bolum.EnDusukPuan,
+                                              EnYuksekPuan = ufb.Bolum.EnYuksekPuan,
+                                              FakulteNo = ufb.Fakulte.FakulteNo,
+                                              UniversiteNo = ufb.Universite.UniversiteNo
+                                          }).FirstOrDefault();
                     if (tercih != null)
                         tercihler.Add(tercih);
                 }

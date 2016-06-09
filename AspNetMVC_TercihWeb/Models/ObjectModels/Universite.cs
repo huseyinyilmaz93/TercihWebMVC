@@ -9,16 +9,17 @@ namespace AspNetMVC_TercihWeb.Models.ObjectModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UniversiteNo { get; set; }
-        [Display(Name="Üniversite Adı")]
+        [Display(Name = "Üniversite Adı")]
         public string UniversiteAdi { get; set; }
-        [Display(Name="İl")]
+        [Display(Name = "İl")]
         public string Il { get; set; }
-        [Display(Name="Üniversite Türü")]
+        [Display(Name = "Üniversite Türü")]
         public string UniTuru { get; set; }
-        [Display(Name="Web Adresi")]
+        [Display(Name = "Web Adresi")]
         public string WebAdresi { get; set; }
 
         public virtual Kategori Kategori { get; set; }
         public virtual ICollection<Fakulte> Fakulteler { get; set; }
+        public virtual List<UniFakBol> UniFakBol { get; set; }
     }
 }

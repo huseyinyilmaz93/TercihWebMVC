@@ -1,7 +1,12 @@
-﻿bContain {
+﻿.bContain {
     font: normal 36px 'Cookie', cursive !important;
     background-image:url('http://a-connect.co.uk/wp-content/uploads/background1.jpg');
 }
+.wdthgt80 {
+    width:80px;
+    height:80px;
+}
+
 .colorRed {
     color:red;
 }

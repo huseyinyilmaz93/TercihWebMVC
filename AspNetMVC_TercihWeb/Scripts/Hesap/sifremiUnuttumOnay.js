@@ -2,10 +2,11 @@
 (function () {
     window.onload = function () {
         var flag = true;
-        var id = document.getElementById("id").value;
+        var kid = document.getElementById("kId").nodeValue;
+        console.log(kId.value);
         $.ajax({
             type: "GET",
-            url: "/API/Hesap/SifremiUnuttumSure/" + id,
+            url: "/API/Hesap/SifremiUnuttumSure/" + kId.value,
             contentType: "application/json",
             async:false,
             success: function (data) {
@@ -26,7 +27,7 @@
     }
 
     function fnc_sifremiUnuttumOnay() {
-        var id = document.getElementById("id").value;
+        var kId = document.getElementById("kId").value;
         var YeniSifre = document.getElementById("YeniSifre").value;
         var YeniSifreTekrar = document.getElementById("YeniSifreTekrar").value;
         var model = {
@@ -35,7 +36,7 @@
         $.ajax({
             type: "POST",
             data: JSON.stringify(model),
-            url: "/API/Hesap/SifremiUnuttumOnay/" + id,
+            url: "/API/Hesap/SifremiUnuttumOnay/" + kId,
             contentType: "application/json",
             success: function (data) {
                 alert('Şifre başarıyla değiştirildi.');

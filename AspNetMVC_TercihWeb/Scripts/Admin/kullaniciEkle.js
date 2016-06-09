@@ -7,7 +7,7 @@
         var hata = document.getElementById("hata");
         hata.innerText = "";
 
-        var MailGonder = (document.getElementById("secim1").checked == true) ? "true" : "false";
+        var MailGonder = (document.getElementById("secim1").checked == true) ? "false" : "true";
 
         var Ad = document.getElementById("Ad").value;
         var Soyad = document.getElementById("Soyad").value;

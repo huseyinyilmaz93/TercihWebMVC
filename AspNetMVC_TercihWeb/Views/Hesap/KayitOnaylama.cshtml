@@ -1,13 +1,21 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "KayitOnaylama";
 }
 
-<h2>Kayıt Onaylama</h2>
 <script src="~/Scripts/Hesap/kayitOnaylama.js"></script>
-<p>
-    Tebrikler, kayıt formunu doldurdunuz. Tercih listenizi oluşturabilmek için son bir adım kaldı. Lütfen mail adresinize
-    gelen linke tıklayarak işlemi tamamlayınız.
-    <input type="hidden" id="id" value="@ViewBag.id" />
-</p>
-<p>Email gelmedi mi? Tekrar göndermek için <input type="button" value="tıklayın" id="mailGonder">. </p>
+<div class="row">
+    <div class="ml15">
+        @Html.Partial("PartialDuyuru")
+    </div>
+    <div class="fr col-md-7 col-lg-7 col-xs-12 col-sm-12">
+        <h2>Kayıt Onaylama</h2>
+
+        <p>
+            Tebrikler, kayıt formunu doldurdunuz. Tercih listenizi oluşturabilmek için son bir adım kaldı. Lütfen mail adresinize
+            gelen linke tıklayarak işlemi tamamlayınız.
+            <input type="hidden" id="id" value="@ViewBag.id" />
+        </p>
+        <p>Email gelmedi mi? Tekrar göndermek için <input type="button" value="tıklayın" id="mailGonder">. </p>
+        </div>
+
+</div>

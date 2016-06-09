@@ -9,11 +9,12 @@ namespace AspNetMVC_TercihWeb.Models.ObjectModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FakulteNo { get; set; }
-        [Display(Name="Fakülte Adı")]
+        [Display(Name = "Fakülte Adı")]
         public string FakulteAdi { get; set; }
 
         public virtual ICollection<Universite> Universiteler { get; set; }
         public virtual ICollection<Bolum> Bolumler { get; set; }
+        public virtual List<UniFakBol> UniFakBol { get; set; }
 
 
     }

@@ -72,7 +72,14 @@
                 <div class="form-group margin0">
                     <div class="row">
                         <div class="col-xs-6 pull-right">
-                            <input id="CikisYap" type="button" class="form-control btn btn-danger" value="Çıkış Yap">
+                            @if (User.Identity.Name != "admin")
+                            {
+                                <a href="/Kullanici/Cikis" class="form-control btn btn-danger" role="button">Çıkış Yap</a>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Cikis" class="form-control btn btn-danger" role="button">Çıkış Yap</a>
+                            }
                         </div>
                         <div class="col-xs-6 pull-right">
                             <input type="button" name="about" id="about" tabindex="4" class="form-control btn btn-success" value="Bilgilerim">
@@ -109,19 +116,19 @@
                 <div class="item active">
                     <img src="~/Content/images/Foto1.jpg" alt="foto1" />
                     <div class="carousel-caption">
-                        <p><a class="btn btn-primary btn-lg" href="HesapUni.html" role="button">Üniversitene Git</a></p>
+                        <p><a class="btn btn-primary btn-lg" href="#" role="button">Üniversitene Git</a></p>
                     </div>
                 </div>
                 <div class="item">
                     <img src="~/Content/images/foto2.jpg" alt="foto2" />
                     <div class="carousel-caption">
-                        <p><a class="btn btn-success btn-lg" href="HesapLise.html" role="button">Liseye Git</a></p>
+                        <p><a class="btn btn-success btn-lg" href="#" role="button">Liseye Git</a></p>
                     </div>
                 </div>
                 <div class="item">
                     <img src="~/Content/images/foto3.jpg" alt="foto3" />
                     <div class="carousel-caption">
-                        <p><a class="btn btn-warning btn-lg" href="HesapLise.html" role="button">Liseye Git</a></p>
+                        <p><a class="btn btn-warning btn-lg" href="#" role="button">Liseye Git</a></p>
                     </div>
                 </div>
             </div>

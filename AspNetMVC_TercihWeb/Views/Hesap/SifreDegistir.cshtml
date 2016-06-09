@@ -2,108 +2,126 @@
 
 @{
     ViewBag.Title = "SifreDegistir";
+    if (User.Identity.Name != "admin")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
 }
 <script src="~/Scripts/Hesap/sifreDegistir.js"></script>
 @*<h2>SifreDegistir</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-group">
-        <div style="color:red" id="hata" class="col-md-10">
-        </div>
-    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    
-    <div class="form-horizontal">
-        <h4>SifreDegistir</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        
-        <input type="hidden" id="id" value="@ViewBag.id" />
         <div class="form-group">
-            @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.KullaniciAdi)
-                @Html.ValidationMessageFor(model => model.KullaniciAdi)
+            <div style="color:red" id="hata" class="col-md-10">
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EskiSifre, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.EskiSifre)
-                @Html.ValidationMessageFor(model => model.EskiSifre)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.YeniSifre, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.YeniSifre)
-                @Html.ValidationMessageFor(model => model.YeniSifre)
-            </div>
-        </div>
+        <div class="form-horizontal">
+            <h4>SifreDegistir</h4>
+            <hr />
+            @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.YeniSifreTekrar, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.YeniSifreTekrar)
-                @Html.ValidationMessageFor(model => model.YeniSifreTekrar)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="btn_sifreDegistir" type="button" value="Şifre Değiştir" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}*@
-
-<div>
-    <div class="col-lg-12">
-        <div class="text-center">
-            <h3 class="m0"><b>Şifre Değiştir</b></h3>
-        </div>
-
-        <form>
             <input type="hidden" id="id" value="@ViewBag.id" />
-
             <div class="form-group">
-                <div id="hata" class="col-md-10 colorRed" >
+                @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.KullaniciAdi)
+                    @Html.ValidationMessageFor(model => model.KullaniciAdi)
                 </div>
             </div>
-            <div class="clearfix"></div>
+
             <div class="form-group">
-                <label for="Kullanıcı Adı">Kullanıcı Adı</label>
-                <input type="text" name="KullaniciAdi" id="KullaniciAdi" tabindex="2" class="form-control" placeholder="Kullanıcı Adı" value="" autocomplete="off">
+                @Html.LabelFor(model => model.EskiSifre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.EskiSifre)
+                    @Html.ValidationMessageFor(model => model.EskiSifre)
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="EskiSifre">Eski Şifre</label>
-                <input type="password" name="EskiSifre" id="EskiSifre" tabindex="2" class="form-control" placeholder="Eski Şifre" autocomplete="off">
+                @Html.LabelFor(model => model.YeniSifre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.YeniSifre)
+                    @Html.ValidationMessageFor(model => model.YeniSifre)
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="YeniSifre">Yeni Şifre</label>
-                <input type="text" name="YeniSifre" id="YeniSifre" tabindex="2" class="form-control" placeholder="Yeni Şifre" autocomplete="off">
+                @Html.LabelFor(model => model.YeniSifreTekrar, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.YeniSifreTekrar)
+                    @Html.ValidationMessageFor(model => model.YeniSifreTekrar)
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="YeniSifreTekrar">Yeni Şifre Tekrar</label>
-                <input type="text" name="YeniSifreTekrar" id="YeniSifreTekrar" tabindex="2" class="form-control" placeholder="Yeni Şifre" autocomplete="off">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btn_sifreDegistir" type="button" value="Şifre Değiştir" class="btn btn-default" />
+                </div>
             </div>
+        </div>
+    }*@
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-xs-5 pull-right">
-                        <input type="button" name="Kayit" id="btn_sifreDegistir" tabindex="2" class="form-control btn btn-success" value="Kayıt">
+
+<div class="row">
+    @if (User.Identity.Name != "admin") { 
+        <div class="ml15">
+            @Html.Partial("PartialDuyuru")
+        </div>
+    }
+    <div class="fr col-md-7 col-lg-7 col-xs-12 col-sm-12">
+        <div>
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h3 class="m0"><b>Şifre Değiştir</b></h3>
+                </div>
+
+                <form>
+                    <input type="hidden" id="id" value="@ViewBag.id" />
+
+                    <div class="form-group">
+                        <div id="hata" class="col-md-10 colorRed">
+                        </div>
                     </div>
-                </div>
-            </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <label for="Kullanıcı Adı">Kullanıcı Adı</label>
+                        <input type="text" name="KullaniciAdi" id="KullaniciAdi" tabindex="2" class="form-control" placeholder="Kullanıcı Adı" value="" autocomplete="off">
+                    </div>
 
-        </form>
-    </div>
+                    <div class="form-group">
+                        <label for="EskiSifre">Eski Şifre</label>
+                        <input type="password" name="EskiSifre" id="EskiSifre" tabindex="2" class="form-control" placeholder="Eski Şifre" autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YeniSifre">Yeni Şifre</label>
+                        <input type="password" name="YeniSifre" id="YeniSifre" tabindex="2" class="form-control" placeholder="Yeni Şifre" autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YeniSifreTekrar">Yeni Şifre Tekrar</label>
+                        <input type="password" name="YeniSifreTekrar" id="YeniSifreTekrar" tabindex="2" class="form-control" placeholder="Yeni Şifre" autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-5 pull-right">
+                                <input type="button" name="Kayit" id="btn_sifreDegistir" tabindex="2" class="form-control btn btn-success" value="Değiştir">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
 </div>
+    </div>

@@ -1,16 +1,16 @@
 ﻿
 window.onload = function () {
         document.getElementById("btn_giris").onclick = fnc_girisYap;
-        document.getElementById("CikisYap").onclick = function () {
-            window.location.href = "/Kullanici/Cikis";
-        }
         var id = document.getElementById("id").value;
         $.ajax({
             type: "GET",
             url: "/API/Hesap/KullaniciBilgi/" + id,
             contentType: "application/json",
             success: function (data) {
-                document.getElementById("kullanici").innerText = data.Ad + " " + data.Soyad;
+                if (data.Ad == null && data.Soyad == null)
+                    document.getElementById("kullanici").innerText = "ADMİN";
+                else
+                    document.getElementById("kullanici").innerText = data.Ad + " " + data.Soyad;
             }
         });
     };

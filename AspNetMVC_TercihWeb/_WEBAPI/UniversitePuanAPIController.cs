@@ -79,23 +79,24 @@ namespace AspNetMVC_TercihWeb._WEBAPI
         [Route("BolumFiltrele")]
         public HttpResponseMessage BolumFiltrele(UniversiteFiltre filtre)
         {
-            List<FiltreModel> bolumler = (from fakulte in db.Fakulteler.Include("Universiteler").Include("Fakulteler")
-                                    from bolum in fakulte.Bolumler
-                                    from universite in fakulte.Universiteler
-                                    orderby bolum.EnDusukPuan descending
-                                    select new FiltreModel{
-                                    BolumAdi=bolum.BolumAdi,
-                                    UniversiteAdi = universite.UniversiteAdi,
-                                    FakulteAdi = fakulte.FakulteAdi,
-                                    Kontenjan = bolum.Kontenjan, 
-                                    PuanTuru = bolum.PuanTuru,
-                                    Yerlesen = bolum.Yerlesen, 
-                                    OkulEnDusukPuan = bolum.OkulEnDusukPuan,
-                                    OkulEnYuksekPuan = bolum.OkulEnYuksekPuan,
-                                    BolumKodu= bolum.BolumKodu, EnDusukPuan = bolum.EnDusukPuan,
-                                    EnYuksekPuan=bolum.EnYuksekPuan, FakulteNo = fakulte.FakulteNo,
-                                    UniversiteNo  = universite.UniversiteNo
-                                    }).ToList();
+            List<FiltreModel> bolumler = (from ufb in db.UniFakBol.Include("Universite").Include("Fakulte").Include("Bolum")
+                                          orderby ufb.Bolum.EnDusukPuan descending
+                                          select new FiltreModel
+                                          {
+                                              BolumAdi = ufb.Bolum.BolumAdi,
+                                              UniversiteAdi = ufb.Universite.UniversiteAdi,
+                                              FakulteAdi = ufb.Fakulte.FakulteAdi,
+                                              Kontenjan = ufb.Bolum.Kontenjan,
+                                              PuanTuru = ufb.Bolum.PuanTuru,
+                                              Yerlesen = ufb.Bolum.Yerlesen,
+                                              OkulEnDusukPuan = ufb.Bolum.OkulEnDusukPuan,
+                                              OkulEnYuksekPuan = ufb.Bolum.OkulEnYuksekPuan,
+                                              BolumKodu = ufb.Bolum.BolumKodu,
+                                              EnDusukPuan = ufb.Bolum.EnDusukPuan,
+                                              EnYuksekPuan = ufb.Bolum.EnYuksekPuan,
+                                              FakulteNo = ufb.Fakulte.FakulteNo,
+                                              UniversiteNo = ufb.Universite.UniversiteNo
+                                          }).ToList();
 
             if (filtre.UniversiteNo != 0)
             {

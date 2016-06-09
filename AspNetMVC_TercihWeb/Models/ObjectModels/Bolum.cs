@@ -7,19 +7,19 @@ namespace AspNetMVC_TercihWeb.Models.ObjectModels
     public class Bolum
     {
         [Key]
-        [Display(Name="Bölüm Kodu")]
+        [Display(Name = "Bölüm Kodu")]
         public string BolumKodu { get; set; }
-        [Display(Name="Bölüm Adı")]
+        [Display(Name = "Bölüm Adı")]
         public string BolumAdi { get; set; }
-        [Display(Name="Puan Türü")]
+        [Display(Name = "Puan Türü")]
         public string PuanTuru { get; set; }
         public int Kontenjan { get; set; }
-        [Display(Name="Yerleşen")]
+        [Display(Name = "Yerleşen")]
         public int Yerlesen { get; set; }
 
-        [Display(Name="En Düşük Puan")]
+        [Display(Name = "En Düşük Puan")]
         public double EnDusukPuan { get; set; }
-        [Display(Name="En Yüksek Puan")]
+        [Display(Name = "En Yüksek Puan")]
         public double EnYuksekPuan { get; set; }
         [Display(Name = "Okul Birincisi En Düşük Puan")]
         public double OkulEnDusukPuan { get; set; }
@@ -28,6 +28,7 @@ namespace AspNetMVC_TercihWeb.Models.ObjectModels
 
         public virtual Fakulte Fakulte { get; set; }
         public virtual List<Tercih> Tercihler { get; set; }
+        public virtual List<UniFakBol> UniFakBol { get; set; }
 
     }
 }

@@ -10,19 +10,22 @@
         document.getElementById("aramaKelime").onchange = function () {
             SayfaSayisi = 1;
             fnc_IstekYap();
-        };
+        }
         document.getElementById("enYuksek").onchange = function () {
             SayfaSayisi = 1;
             fnc_IstekYap();
-        };
+        }
         document.getElementById("enDusuk").onchange = function () {
             SayfaSayisi = 1;
             fnc_IstekYap();
-        };
+        }
         document.getElementById("kayitSayisi").onchange = function () {
+            console.log("123");
+            KayitSayisi = this.value;
             SayfaSayisi = 1;
             fnc_IstekYap();
-        };
+        }
+
         $.ajax({
             type: "GET",
             url: "/API/UniversitePuan/TumUniversiteler",

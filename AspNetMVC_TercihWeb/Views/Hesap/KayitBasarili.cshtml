@@ -1,8 +1,15 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "KayitBasarili";
 }
 <script src="~/Scripts/Hesap/kayitBasarili.js"></script>
-<input type="hidden" id="id" value="@ViewBag.id" />
-<h2>Kayıt Başarılı</h2>
-<div id="sonuc"></div>
+<div class="row">
+    <div class="ml15">
+        @Html.Partial("PartialDuyuru")
+    </div>
+    <div class="fr col-md-7 col-lg-7 col-xs-12 col-sm-12">
+
+            <input type="hidden" id="kId" value="@ViewBag.id" />
+            <h2>Kayıt Başarılı</h2>
+            <div id="sonuc"></div>
+        </div>
+    </div>

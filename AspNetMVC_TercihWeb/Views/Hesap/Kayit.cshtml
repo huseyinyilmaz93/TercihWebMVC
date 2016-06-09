@@ -6,116 +6,119 @@
 <script src="~/Scripts/Hesap/kayit.js"></script>
 
 @*<h2>Kayit</h2>
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    
-    <div class="form-horizontal">
-        <h4>Kayit</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ad, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ad)
-                @Html.ValidationMessageFor(model => model.Ad)
+
+        <div class="form-horizontal">
+            <h4>Kayit</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ad)
+                    @Html.ValidationMessageFor(model => model.Ad)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Soyad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Soyad)
+                    @Html.ValidationMessageFor(model => model.Soyad)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.KullaniciAdi)
+                    @Html.ValidationMessageFor(model => model.KullaniciAdi)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sifre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Sifre)
+                    @Html.ValidationMessageFor(model => model.Sifre)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SifreTekrar, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.SifreTekrar)
+                    @Html.ValidationMessageFor(model => model.SifreTekrar)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btn_kayit" type="button" value="Kayıt" class="btn btn-default" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Soyad, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Soyad)
-                @Html.ValidationMessageFor(model => model.Soyad)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.KullaniciAdi, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.KullaniciAdi)
-                @Html.ValidationMessageFor(model => model.KullaniciAdi)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sifre, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Sifre)
-                @Html.ValidationMessageFor(model => model.Sifre)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SifreTekrar, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.SifreTekrar)
-                @Html.ValidationMessageFor(model => model.SifreTekrar)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="btn_kayit" type="button" value="Kayıt" class="btn btn-default" />
-            </div>
-        </div>
+    }*@
+<div class="row">
+    <div class="ml15">
+        @Html.Partial("PartialDuyuru")
     </div>
-}*@
-<div class="">
-        <div class="col-lg-12">
-            <div class="text-center"><h3><b>Kayıt</b></h3></div>
-            <form>
-                <div class="form-group colorRed">
-                    <div id="hata" class="col-md-10">
+    <div class="fr col-md-7 col-lg-7 col-xs-12 col-sm-12">
+        <div class="text-center"><h3><b>Kayıt</b></h3></div>
+        <form>
+            <div class="form-group colorRed">
+                <div id="hata" class="col-md-10">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group">
+                <label for="Ad">Ad</label>
+                <input type="text" name="Ad" id="Ad" tabindex="1" class="form-control" placeholder="Ad" value="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="Soyad">Soyad</label>
+                <input type="text" name="Soyad" id="Soyad" tabindex="1" class="form-control" placeholder="Soyad" value="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="KullanıcıAdi">Kullanıcı Adı</label>
+                <input type="text" name="KullanıcıAdı" id="KullaniciAdi" tabindex="1" class="form-control" placeholder="Kullanıcı Adı" value="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="text" name="Email" id="Email" tabindex="1" class="form-control" placeholder="Email" value="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="Sifre">Şifre</label>
+                <input type="password" name="Sifre" id="Sifre" tabindex="1" class="form-control" placeholder="Şifre" value="" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="SifreTekrar">Şifre Tekrar</label>
+                <input type="password" name="Sifre Tekar" id="SifreTekrar" tabindex="1" class="form-control" placeholder="Şifre Tekrar" value="" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-5 pull-right">
+                        <input type="button" name="Kayit" id="btn_kayit" tabindex="4" class="form-control btn btn-success" value="Kayıt">
                     </div>
                 </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
-                    <label for="Ad">Ad</label>
-                    <input type="text" name="Ad" id="Ad" tabindex="1" class="form-control" placeholder="Ad" value="" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label for="Soyad">Soyad</label>
-                    <input type="text" name="Soyad" id="Soyad" tabindex="1" class="form-control" placeholder="Soyad" value="" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label for="KullanıcıAdi">Kullanıcı Adı</label>
-                    <input type="text" name="KullanıcıAdı" id="KullaniciAdi" tabindex="1" class="form-control" placeholder="Kullanıcı Adı" value="" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label for="Email">Email</label>
-                    <input type="text" name="Email" id="Email" tabindex="1" class="form-control" placeholder="Email" value="" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label for="Sifre">Şifre</label>
-                    <input type="password" name="Sifre" id="Sifre" tabindex="1" class="form-control" placeholder="Şifre" value="" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="SifreTekrar">Şifre Tekrar</label>
-                    <input type="password" name="Sifre Tekar" id="SifreTekrar" tabindex="1" class="form-control" placeholder="Şifre Tekrar" value="" autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-5 pull-right">
-                            <input type="button" name="Kayit" id="btn_kayit" tabindex="4" class="form-control btn btn-success" value="Kayıt">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
 </div>

@@ -21,11 +21,11 @@ namespace AspNetMVC_TercihWeb.Controllers
             base.GirisYap(kullanici);
         }
 
-        [HttpGet]
         [Authorize(Roles = "ADMIN")] 
-        public void Cikis()
+        public ActionResult Cikis()
         {
             base.CikisYap();
+            return RedirectToAction("Index", "Site");
         }
         [Authorize(Roles = "ADMIN")]
         public ActionResult Kullanicilar()
